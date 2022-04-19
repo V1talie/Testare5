@@ -1,4 +1,5 @@
-package Redirection_Tests;
+package Text_Tests;
+
 
 import UTIL.WorkData;
 import io.cucumber.java.en.Given;
@@ -10,36 +11,44 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static org.junit.Assert.assertNotEquals;
+import static UTIL.WorkData.COMMENT_STRING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-
-public class LoginTest {
+public class CommentTest {
     WebDriver currentDriver;
     WorkData workData = new WorkData();
-    @Given("MyAnimeList login page")
-    public void mainPage(){
+    @Given("MyAnimeList profile  is opened")
+    public void mainPage() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get(workData.loginPage);
-        currentDriver = driver;
-    }
-    @When("I introduce an email with a wrong password")
-    public void clickLogin(){
-        WebDriver driver = currentDriver;
         WebElement usernameField = driver.findElement(By.name("user_name"));
         WebElement passwordField = driver.findElement(By.name("password"));
         WebElement loginButton = driver.findElement(By.className("btn-form-submit"));
-        usernameField.sendKeys(workData.usernameFAKE);
-        passwordField.sendKeys(workData.passwordFAKE);
+        usernameField.sendKeys(workData.username);
+        passwordField.sendKeys(workData.password);
         loginButton.click();
+        Thread.sleep(3000);
+        driver.get(workData.profile);
         currentDriver = driver;
     }
-    @Then("I'm not able to login")
+
+    @When("I insert string in comment")
+    public void clickLogin(){
+        WebDriver driver = currentDriver;
+        WebElement commentTextArea = driver.findElement(By.name("commentText"));
+        commentTextArea.sendKeys(COMMENT_STRING);
+        WebElement commentSubmit = driver.findElement(By.name("commentSubmit"));
+        commentSubmit.click();
+        currentDriver = driver;
+    }
+
+    @Then("the comments are updated")
     public void redirectedToLoginPage(){
         WebDriver driver = currentDriver;
-        assertEquals("Login - MyAnimeList.net", driver.getTitle());
+        WebElement comtext = driver.findElement(By.className("comment-text"));
+        assertEquals(comtext.getText(),COMMENT_STRING);
         driver.quit();
     }
 
