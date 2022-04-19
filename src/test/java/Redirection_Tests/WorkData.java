@@ -6,5 +6,4 @@ public class WorkData {
     String email = "emailRandom@mail.com";
     String password = "ceva";
 
-
 }
