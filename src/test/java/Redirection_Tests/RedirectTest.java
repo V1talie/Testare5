@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RedirectTest {
 WorkData workData = new WorkData();
 WebDriver currentDriver;
-@Given("Facebook main page is opened")
+@Given("MyAnimeList main page is opened")
 public void mainPage(){
     WebDriverManager.chromedriver().setup();
     WebDriver driver = new ChromeDriver();
@@ -25,15 +25,14 @@ public void mainPage(){
 @When("I click on \"Login\" button")
 public void clickLogin(){
     WebDriver driver = currentDriver;
-    //driver.get("https://www.facebook.com/");
-    WebElement loginButton = driver.findElement(By.name("login"));
+    WebElement loginButton = driver.findElement(By.className("btn-login"));
     loginButton.click();
     currentDriver = driver;
 }
 @Then("I'm redirected to login page")
 public void redirectedToLoginPage(){
     WebDriver driver = currentDriver;
-    assertEquals("Facebook - log in or sign up", driver.getTitle());
+    assertEquals("Login - MyAnimeList.net", driver.getTitle());
     driver.quit();
 }
 

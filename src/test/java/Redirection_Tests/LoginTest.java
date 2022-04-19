@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoginTest {
     WebDriver currentDriver;
     WorkData workData = new WorkData();
-    @Given("Facebook login page")
+    @Given("MyAnimeList login page")
     public void mainPage(){
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
@@ -27,10 +27,10 @@ public class LoginTest {
     @When("I introduce an email with a wrong password")
     public void clickLogin(){
         WebDriver driver = currentDriver;
-        WebElement emailField = driver.findElement(By.name("email"));
-        WebElement passwordField = driver.findElement(By.name("pass"));
-        WebElement loginButton = driver.findElement(By.name("login"));
-        emailField.sendKeys(workData.email);
+        WebElement usernameField = driver.findElement(By.name("user_name"));
+        WebElement passwordField = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.className("btn-form-submit"));
+        usernameField.sendKeys(workData.username);
         passwordField.sendKeys(workData.password);
         loginButton.click();
         currentDriver = driver;
@@ -38,8 +38,10 @@ public class LoginTest {
     @Then("I'm not able to login")
     public void redirectedToLoginPage(){
         WebDriver driver = currentDriver;
-        assertEquals("Log into Facebook", driver.getTitle());
+        assertEquals("Login - MyAnimeList.net", driver.getTitle());
         driver.quit();
     }
+
+
 
 }
