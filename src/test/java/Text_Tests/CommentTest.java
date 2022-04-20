@@ -19,7 +19,7 @@ public class CommentTest {
     WebDriver currentDriver;
     WorkData workData = new WorkData();
     @Given("MyAnimeList profile  is opened")
-    public void mainPage() throws InterruptedException {
+    public void mainProfile() throws InterruptedException {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get(workData.loginPage);
@@ -35,7 +35,7 @@ public class CommentTest {
     }
 
     @When("I insert {string} in comment")
-    public void clickLogin(String comment){
+    public void insertString(String comment){
         WebDriver driver = currentDriver;
         WebElement commentTextArea = driver.findElement(By.name("commentText"));
         commentTextArea.sendKeys(comment);
@@ -45,8 +45,9 @@ public class CommentTest {
     }
 
     @Then("the comments are updated")
-    public void redirectedToLoginPage(){
+    public void updateComments() throws InterruptedException {
         WebDriver driver = currentDriver;
+        Thread.sleep(7000);
         WebElement comtext = driver.findElement(By.className("comment-text"));
         assertEquals(comtext.getText(),COMMENT_STRING);
         driver.quit();
