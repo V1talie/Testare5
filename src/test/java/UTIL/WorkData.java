@@ -23,5 +23,9 @@ public class WorkData {
     public String expectedSearch = "Search Results for \"" + searchString + "\"";
 
     // Function_Tests
+    public String searchKey = "tensei";
+    public String expectedAnime = "Mushoku Tensei: Isekai Ittara Honki Dasu - MyAnimeList.net";
+    public String friendUrl = "https://myanimelist.net/myfriends.php?go=add";
+    public String friendName = "anatol";
     // Zdesi bil ia
 }
