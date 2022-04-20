@@ -1,6 +1,7 @@
 package UTIL;
 
 public class WorkData {
+
     // Global
     public String username = "PreainaltulMarcu";
     public  String password = "A123456789_";

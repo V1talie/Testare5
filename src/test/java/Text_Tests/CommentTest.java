@@ -34,11 +34,11 @@ public class CommentTest {
         currentDriver = driver;
     }
 
-    @When("I insert string in comment")
-    public void clickLogin(){
+    @When("I insert {string} in comment")
+    public void clickLogin(String comment){
         WebDriver driver = currentDriver;
         WebElement commentTextArea = driver.findElement(By.name("commentText"));
-        commentTextArea.sendKeys(COMMENT_STRING);
+        commentTextArea.sendKeys(comment);
         WebElement commentSubmit = driver.findElement(By.name("commentSubmit"));
         commentSubmit.click();
         currentDriver = driver;
@@ -51,7 +51,5 @@ public class CommentTest {
         assertEquals(comtext.getText(),COMMENT_STRING);
         driver.quit();
     }
-
-
 
 }
