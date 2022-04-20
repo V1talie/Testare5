@@ -18,7 +18,7 @@ public class TextDescriptionTest {
 WorkData workData = new WorkData();
 WebDriver currentDriver;
 @Given("MyAnimeList profile settings is opened")
-public void mainPage() throws InterruptedException {
+public void mainProfile() throws InterruptedException {
     WebDriverManager.chromedriver().setup();
     WebDriver driver = new ChromeDriver();
     driver.get(workData.loginPage);
@@ -34,7 +34,7 @@ public void mainPage() throws InterruptedException {
 }
 
 @When("I insert {string} in about me")
-public void clickLogin(String string){
+public void insertString(String string){
     WebDriver driver = currentDriver;
     WebElement abouMeTextArea = driver.findElement(By.name("profile_aboutme"));
     abouMeTextArea.clear();
@@ -45,7 +45,7 @@ public void clickLogin(String string){
 }
 
 @Then("the description is updated on profile")
-public void redirectedToLoginPage(){
+public void updateDescription(){
     WebDriver driver = currentDriver;
     driver.get(workData.profile);
     assertEquals(DESCRIPTION_STRING, driver.findElement(By.className("word-break")).getText());
