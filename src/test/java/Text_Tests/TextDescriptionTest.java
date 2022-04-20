@@ -33,12 +33,12 @@ public void mainPage() throws InterruptedException {
     currentDriver = driver;
 }
 
-@When("I insert string in about me")
-public void clickLogin(){
+@When("I insert {string} in about me")
+public void clickLogin(String string){
     WebDriver driver = currentDriver;
     WebElement abouMeTextArea = driver.findElement(By.name("profile_aboutme"));
     abouMeTextArea.clear();
-    abouMeTextArea.sendKeys(DESCRIPTION_STRING);
+    abouMeTextArea.sendKeys(string);
     WebElement submitButton = driver.findElement(By.name("submit"));
     submitButton.click();
     currentDriver = driver;
